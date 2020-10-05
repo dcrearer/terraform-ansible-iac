@@ -1,0 +1,22 @@
+---
+- hosts: "{{ passed_in_hosts }}"
+  become: yes
+  remote_user: ec2-user
+
+  tasks:
+
+    - name: install git client
+      yum:
+        name: git
+        state: present
+    
+    - name: install apache webserver
+      yum:
+        name: httpd
+        state: present
+    
+    - name: start webserver
+      service: 
+        name: httpd
+        state: started
+        enabled: yes
